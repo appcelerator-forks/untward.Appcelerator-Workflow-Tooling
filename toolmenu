@@ -1,0 +1,91 @@
+#!/bin/bash
+
+# The Appcelerator Platform Developmet Tooling Main Menu
+#
+# Author Trevor Ward
+#
+# Copyright Trevor Ward 2015
+#
+
+# This menu is the access point to a suite of tools, that hopefully
+# make using the Appcelerator Platform easier.
+#
+# Although this menu is aimed at using an editor like Atom or Sublime
+# They can also be used in conjuction with the Appcelerator Studio.
+#
+
+ERR_MSG=""
+UPD_MSG=""
+BYE_MSG=" Thank you for using the development tooling menu "
+
+clear
+
+
+while :
+do
+  # If error exists, display it
+  if [ "$ERR_MSG" != "" ]; then
+    clear
+    echo ""
+    echo "----------------------------------------"
+    echo "Error: $ERR_MSG"
+    echo "----------------------------------------"
+  fi
+  if [ "$UPD_MSG" != "" ]; then
+    clear
+    echo ""
+    echo "----------------------------------------"
+    echo "$UPD_MSG"
+    echo "----------------------------------------"
+  fi
+
+  echo ""
+  echo "----------------------------------------"
+  echo " DevTools Menu (toolmenu)               "
+  echo "----------------------------------------"
+  echo ""
+
+  # Write out the menu options...
+  echo "  1:  Tools Menu "
+  echo "  2:  Appcelerator Menu"
+  echo "  3:  Atom Menu"
+  echo "  4:  Chmod 755 Tool Scripts"
+  echo "  0:  Exit"
+  echo ""
+
+  # Clear the  message
+  ERR_MSG=""
+  UPD_MSG=""
+
+  # Read the user input
+  read -p "Select an option:  " SEL
+
+  case $SEL in
+    1) clear;
+         source toolsMenu ;;
+
+    2) clear;
+          source appcMenu ;;
+
+    3) clear;
+          source atomMenu ;;
+
+    4) clear;
+         chmod  755 ~/Devtools/Scripts/*;
+         chmod  755 ~/Devtools/SqlScripts/*;
+         chmod  755 ~/Devtools/TiScripts/*;
+         chmod  755 ~/Devtools/AtomTools/*;
+         UPD_MSG=" All scripts permissions updated" ;;
+
+    0) clear;
+         echo ""
+         echo "----------------------------------------"
+         echo " Thank you for using the menu system    "
+         echo "----------------------------------------"
+         echo "";
+         break ;;
+
+    *) ERR_MSG=" Please enter a valid option!"
+  esac
+
+done
